@@ -5,13 +5,18 @@
 :Revision:  v0.1
 :toc: macro
 
-toc::[]
+Experiment in setting up a C++ build pipeline.
 
 image:https://badge.buildkite.com/edef4254dcd1c609713e25d8ac67f9c04dba5308f31c408d13.svg?branch=main[title="Buildkite build status",link=https://buildkite.com/melsicon/c-plus-plus-sample]
 
+toc::[]
+
 == Purpose
 
-Experiment in setting up a C++ build pipeline.
+This code is a simple
+https://blog.codinghorror.com/why-cant-programmers-program/[FizzBuzz]
+implementation, to play around with a
+https://en.wikipedia.org/wiki/C%2B%2B17[C++17] build pipeline.
 
 == Running
 
