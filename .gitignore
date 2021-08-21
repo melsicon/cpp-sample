@@ -1,0 +1,12 @@
+.*
+!/.bazelignore
+!/.bazelrc
+!/.bazelversion
+!/.envrc
+!/.gitattributes
+!/.gitignore
+!/.github/
+!/.buildkite/
+/bazel-*
+/bin/
+/user.bazelrc

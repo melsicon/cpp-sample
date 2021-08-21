@@ -1,0 +1,49 @@
+= Melsicon C++ Sample
+:Author:    Oliver Eikemeier
+:Email:     <eikemeier@fillmore-labs.com>
+:Date:      2021-08
+:Revision:  v0.1
+:toc: macro
+
+toc::[]
+
+image:https://badge.buildkite.com/edef4254dcd1c609713e25d8ac67f9c04dba5308f31c408d13.svg?branch=main[title="Buildkite build status",link=https://buildkite.com/melsicon/c-plus-plus-sample]
+
+== Purpose
+
+Experiment in setting up a C++ build pipeline.
+
+== Running
+
+=== Prerequisites
+
+You need https://github.com/bazelbuild/bazelisk[Bazelisk] installed, with https://brew.sh[HomeBrew]
+just use [source,shell]`brew install bazelbuild/tap/bazelisk`.
+
+=== Tests
+
+To run all tests, use
+
+[source,shell]
+bazel test //test/...
+
+=== Main App
+
+Run with
+
+[source,shell]
+bazel run //main:cpp-sample
+
+== License
+
+Copyright 2021 melsicon GmbH
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this material except
+in compliance with the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is
+distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied. See the License for the specific language governing permissions and limitations under the
+License.
