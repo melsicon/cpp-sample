@@ -3,9 +3,9 @@
 #include <string>
 
 namespace {
-const std::string_view FIZZ = "Fizz";
-const std::string_view BUZZ = "Buzz";
-const std::string_view FIZZBUZZ = "FizzBuzz";
+constexpr std::string_view FIZZ = "Fizz";
+constexpr std::string_view BUZZ = "Buzz";
+constexpr std::string_view FIZZBUZZ = "FizzBuzz";
 }  // namespace
 
 std::string fizzbuzz(int n) {
