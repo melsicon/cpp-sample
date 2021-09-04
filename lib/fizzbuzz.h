@@ -1,5 +1,5 @@
-#ifndef LIB_HELLO_TIME_H_
-#define LIB_HELLO_TIME_H_
+#ifndef LIB_FIZZBUZZ_H_
+#define LIB_FIZZBUZZ_H_
 
 #include <string>
 
