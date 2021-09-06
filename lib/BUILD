@@ -3,11 +3,26 @@ load("//:flags.bzl", "COMMON_COPTS")
 
 cc_library(
     name = "fizzbuzz",
-    srcs = glob(["*.cc"]),
-    hdrs = glob(["*.h"]),
+    srcs = ["fizzbuzz.cc"],
+    hdrs = ["fizzbuzz.h"],
     copts = COMMON_COPTS,
-    visibility = [
-        "//main:__pkg__",
-        "//test:__pkg__",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//main:fizzbuzz",
+        "@com_google_absl//absl/strings",
+        "@com_google_fruit//:fruit",
+    ],
+)
+
+cc_library(
+    name = "fizzbuzz_alt",
+    srcs = ["fizzbuzz-alt.cc"],
+    hdrs = ["fizzbuzz-alt.h"],
+    copts = COMMON_COPTS,
+    visibility = ["//visibility:public"],
+    deps = [
+        "//main:fizzbuzz",
+        "@com_google_absl//absl/strings",
+        "@com_google_fruit//:fruit",
     ],
 )

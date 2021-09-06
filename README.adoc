@@ -1,8 +1,8 @@
 = Melsicon C++ Sample
 :Author:    Oliver Eikemeier
 :Email:     <eikemeier@fillmore-labs.com>
-:Date:      2021-08
-:Revision:  v0.1
+:Date:      2021-09
+:Revision:  v0.2
 :toc: macro
 
 Experiment in setting up a C++ build pipeline.
@@ -34,10 +34,75 @@ bazel test //test/...
 
 === Main App
 
-Run with
+Run the app with
 
 [source,shell]
 bazel run //main:cpp-sample
+
+or, for the alternate strategy (same result):
+
+[source,shell]
+bazel run //main:cpp-sample-alt
+
+=== Dependency Inversion Principle
+
+This code demonstrates the application of the
+https://en.wikipedia.org/wiki/Dependency_inversion_principle[dependency inversion principle].
+Naively, one would simply make the main programm dependent on the concrete implementation of the
+transformation strategy. Here, we simply let the main programm own the interface, making it
+independent of the implementation and therefore the strategy exchangable.
+
+[subs="quotes"]
+.Dependencies of `//main:main`
+----
+*bazel query 'filter("^//", kind("source file", deps(//main:main)))'*
+_//main:fizzbuzz.h_
+_//main:main.cc_
+_//main:main.h_
+----
+
+Then, to put everything together, link:main/cpp-sample.cc[`cpp-sample.cc`] or
+link:main/cpp-sample-alt.cc[`cpp-sample-alt.cc`] pull in the concrete implementaion making a
+runnable application:
+
+[subs="quotes"]
+.Dependencies of `//main:cpp-sample`
+----
+*bazel query 'filter("^//", kind("source file", deps(//main:cpp-sample)))'*
+_//lib:fizzbuzz.cc_
+_//lib:fizzbuzz.h_
+_//main:cpp-sample.cc_
+_//main:fizzbuzz.h_
+_//main:main.cc_
+_//main:main.h_
+----
+
+[subs="quotes"]
+.Dependencies of `//main:cpp-sample-alt`
+----
+*bazel query 'filter("^//", kind("source file", deps(//main:cpp-sample-alt)))'*
+_//lib:fizzbuzz-alt.cc_
+_//lib:fizzbuzz-alt.h_
+_//main:cpp-sample-alt.cc_
+_//main:fizzbuzz.h_
+_//main:main.cc_
+_//main:main.h_
+----
+
+The test depends on both implementations, testing them via the shared interface:
+
+[subs="quotes"]
+.Dependencies of `//test:fizzbuzz-test`
+----
+*bazel query 'filter("^//", kind("source file", deps(//test:fizzbuzz-test)))'*
+_//lib:fizzbuzz-alt.cc_
+_//lib:fizzbuzz-alt.h_
+_//lib:fizzbuzz.cc_
+_//lib:fizzbuzz.h_
+_//main:fizzbuzz.h_
+_//test:fizzbuzz-test.cc_
+----
+
 
 == License
 

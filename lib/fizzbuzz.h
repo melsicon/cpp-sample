@@ -1,8 +1,10 @@
 #ifndef LIB_FIZZBUZZ_H_
 #define LIB_FIZZBUZZ_H_
 
-#include <string>
+#include <fruit/fruit.h>
 
-std::string fizzbuzz(int n);
+#include "main/fizzbuzz.h"
+
+fruit::Component<FizzBuzz> getFizzBuzzComponent();
 
 #endif

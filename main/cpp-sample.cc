@@ -1,10 +1,8 @@
-#include <iostream>
+#include <fruit/fruit.h>
 
 #include "lib/fizzbuzz.h"
+#include "main/main.h"
 
-int main(int, char **) {
-  for (int i = 1; i <= 100; i++) {
-    std::cout << fizzbuzz(i) << std::endl;
-  }
-  return 0;
+fruit::Component<FizzBuzz> getComponent() {
+  return fruit::createComponent().install(getFizzBuzzComponent);
 }

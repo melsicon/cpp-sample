@@ -1,24 +1,38 @@
-#include "lib/fizzbuzz.h"
+#include "main/fizzbuzz.h"
+
+#include <fruit/fruit.h>
 
 #include <string>
 
+#include "absl/strings/string_view.h"
+#include "lib/fizzbuzz.h"
+
 namespace {
-constexpr std::string_view FIZZ = "Fizz";
-constexpr std::string_view BUZZ = "Buzz";
-constexpr std::string_view FIZZBUZZ = "FizzBuzz";
+constexpr absl::string_view FIZZ = "Fizz";
+constexpr absl::string_view BUZZ = "Buzz";
+constexpr absl::string_view FIZZBUZZ = "FizzBuzz";
 }  // namespace
 
-std::string fizzbuzz(int n) {
-  bool divisible_by_3 = n % 3 == 0;
-  bool divisible_by_5 = n % 5 == 0;
+class FizzBuzzImpl : public FizzBuzz {
+ public:
+  INJECT(FizzBuzzImpl()) {}
 
-  if (divisible_by_3 && divisible_by_5) {
-    return std::string(FIZZBUZZ);
-  } else if (divisible_by_3) {
-    return std::string(FIZZ);
-  } else if (divisible_by_5) {
-    return std::string(BUZZ);
-  } else {
-    return std::to_string(n);
+  virtual std::string operator()(int n) const {
+    bool divisible_by_3 = n % 3 == 0;
+    bool divisible_by_5 = n % 5 == 0;
+
+    if (divisible_by_3 && divisible_by_5) {
+      return std::string(FIZZBUZZ);
+    } else if (divisible_by_3) {
+      return std::string(FIZZ);
+    } else if (divisible_by_5) {
+      return std::string(BUZZ);
+    } else {
+      return std::to_string(n);
+    }
   }
+};
+
+fruit::Component<FizzBuzz> getFizzBuzzComponent() {
+  return fruit::createComponent().bind<FizzBuzz, FizzBuzzImpl>();
 }
